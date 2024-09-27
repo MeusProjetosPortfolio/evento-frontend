@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Participantes</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Link para o arquivo de estilo externo -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Imagem de fundo -->
+    <div class="background-img"></div>
+
+    <!-- Formulário com fundo personalizado -->
+    <div class="container mt-5">
+      <h2 class="text-center mb-4">Cadastro de Participantes</h2>
+      <form action="/participantes" method="post">
+        <div class="mb-3">
+          <label for="nomeCompleto" class="form-label">Nome Completo</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nomeCompleto"
+            name="nomeCompleto"
+            placeholder="Digite seu nome completo"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="comunidade" class="form-label"
+            >Comunidade que faz parte</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="comunidade"
+            name="comunidade"
+            placeholder="Digite o nome da comunidade"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <button type="reset" class="btn btn-secondary">Limpar</button>
+      </form>
+
+      <!-- Tabela para listar os participantes cadastrados -->
+      <div class="mt-5">
+        <h3 class="text-center">Participantes Cadastrados</h3>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome Completo</th>
+              <th>Comunidade</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Exemplo Nome</td>
+              <td>Comunidade Exemplo</td>
+              <td>
+                <a href="/participantes/1" class="btn btn-info btn-sm"
+                  >Editar</a
+                >
+                <form
+                  action="/participantes/1"
+                  method="post"
+                  style="display: inline"
+                >
+                  <input type="hidden" name="_method" value="delete" />
+                  <button type="submit" class="btn btn-danger btn-sm">
+                    Excluir
+                  </button>
+                </form>
+              </td>
+            </tr>
+            <!-- Outras linhas de exemplo -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Botão de Finalizar para Gerar PDF -->
+      <div class="text-center mt-4">
+        <form action="/participantes/finalizar" method="post">
+          <button type="submit" class="btn btn-success btn-lg">
+            Finalizar e Gerar PDF
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS (opcional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
