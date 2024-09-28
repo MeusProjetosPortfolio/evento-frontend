@@ -1,6 +1,7 @@
 const formulario = document.querySelector("form");
 const nome = document.querySelector("#nomeCompleto");
 const comunidade = document.querySelector("#comunidade");
+const contato = document.querySelector("#contato"); // Seletor para o campo de contato
 const tabelaBody = document.querySelector("tbody");
 
 // Função para carregar e exibir os participantes na tabela
@@ -22,6 +23,9 @@ function carregarParticipantes() {
                     <td>${index + 1}</td>
                     <td>${participant.name}</td>
                     <td>${participant.church}</td>
+                    <td>${
+                      participant.cellphone
+                    }</td> <!-- Exibindo o contato na tabela -->
                     <td>
                       <a href="#" class="btn btn-info btn-sm">Editar</a>
                       <button class="btn btn-danger btn-sm">Excluir</button>
@@ -45,10 +49,12 @@ function cadastrar() {
     body: JSON.stringify({
       name: nome.value,
       church: comunidade.value,
+      cellphone: contato.value, // Incluindo o contato no corpo da requisição
     }),
   })
     .then(function (res) {
       console.log(res);
+      carregarParticipantes(); // Atualiza a tabela após o cadastro
     })
     .catch(function (res) {
       console.log(res);
@@ -56,7 +62,9 @@ function cadastrar() {
 }
 
 function limpar() {
-  (nome.value = ""), (comunidade.value = "");
+  nome.value = "";
+  comunidade.value = "";
+  contato.value = ""; // Limpando o campo de contato
 }
 
 formulario.addEventListener("submit", function (event) {
