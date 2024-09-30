@@ -22,6 +22,9 @@ function carregarParticipantes() {
       // Adiciona cada participante na tabela
       data.forEach((participant, index) => {
         let row = `<tr>
+                    <td hidden>${
+                      participant.id
+                    }</td> <!-- Oculta o ID usando a propriedade hidden -->
                     <td>${index + 1}</td>
                     <td>${participant.name}</td>
                     <td>${participant.church}</td>
@@ -66,9 +69,17 @@ function salvarParticipante(event) {
     }),
   })
     .then((res) => {
-      console.log(res);
-      carregarParticipantes(); // Atualiza a tabela após salvar
-      limparFormulario(); // Limpa o formulário
+      if (res.ok) {
+        carregarParticipantes(); // Atualiza a tabela após salvar
+        limparFormulario(); // Limpa o formulário
+        alert(
+          `Participante ${
+            editandoId ? "atualizado" : "cadastrado"
+          } com sucesso!`
+        );
+      } else {
+        console.log("Erro ao salvar participante: ", res.status);
+      }
     })
     .catch((res) => {
       console.log(res);
@@ -77,6 +88,11 @@ function salvarParticipante(event) {
 
 // Função para editar um participante
 function editarParticipante(id) {
+  if (!id) {
+    alert("ID do participante não encontrado.");
+    return;
+  }
+
   fetch(`http://localhost:8080/api/person/${id}`, {
     headers: {
       Accept: "application/json",
@@ -97,15 +113,22 @@ function editarParticipante(id) {
 
 // Função para excluir um participante
 function excluirParticipante(id) {
+  console.log("ID recebido para exclusão:", id); // Verifica o valor de `id` ao clicar no botão
+
+  if (!id || id === "undefined") {
+    alert("ID do participante não encontrado.");
+    return;
+  }
+
   fetch(`http://localhost:8080/api/person/${id}`, {
     method: "DELETE",
   })
     .then((res) => {
-      console.log("Participante excluído com sucesso!");
-      carregarParticipantes(); // Atualiza a tabela após a exclusão
+      alert("Participante excluído com sucesso!");
+      carregarParticipantes(); // Recarrega a tabela após a exclusão
     })
-    .catch((res) => {
-      console.log("Erro ao excluir participante: ", res);
+    .catch((error) => {
+      console.log("Erro ao excluir participante: ", error);
     });
 }
 
