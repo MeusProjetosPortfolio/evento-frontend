@@ -19,7 +19,7 @@
     <!-- Formulário com fundo personalizado -->
     <div class="container mt-5">
       <h2 class="text-center mb-4">Cadastro de Participantes</h2>
-      <form>
+      <form id="formulario-participante">
         <div class="mb-3">
           <label for="nomeCompleto" class="form-label">Nome Completo</label>
           <input
@@ -71,29 +71,8 @@
               <th>Ações</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Exemplo Nome</td>
-              <td>Comunidade Exemplo</td>
-              <td>(00) 1234-5678</td>
-              <td>
-                <a href="/participantes/1" class="btn btn-info btn-sm"
-                  >Editar</a
-                >
-                <form
-                  action="/participantes/1"
-                  method="post"
-                  style="display: inline"
-                >
-                  <input type="hidden" name="_method" value="delete" />
-                  <button type="submit" class="btn btn-danger btn-sm">
-                    Excluir
-                  </button>
-                </form>
-              </td>
-            </tr>
-            <!-- Outras linhas de exemplo -->
+          <tbody id="tabela-participantes">
+            <!-- Linhas de participantes serão adicionadas dinamicamente aqui -->
           </tbody>
         </table>
       </div>
