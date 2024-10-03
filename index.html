@@ -79,7 +79,10 @@
 
       <!-- Botão de Finalizar para Gerar PDF -->
       <div class="text-center mt-4">
-        <form action="/participantes/finalizar" method="post">
+        <form
+          action="http://localhost:8080/api/person/relatorio-pdf"
+          method="get"
+        >
           <button type="submit" class="btn btn-success btn-lg">
             Finalizar e Gerar PDF
           </button>
